@@ -1,4 +1,7 @@
-let operator, firstNum, secNum;
+let operator, secNum;
+let firstNum = "";
+let firstClick = false;
+let operatorPicked = false;
 
 function add(x, y) {
     return x + y;
@@ -33,16 +36,15 @@ function display(shownNum) {
 }
 
 //function to click numbers and display them
+//need to amend this
 function displayNums() {
     const numButton = document.querySelectorAll('.just-nums');
-    let firstClick = false;
 
     numButton.forEach((button) => {
         button.addEventListener('click', () => {
             if (!firstClick) {
-                display(button);
-                firstNum = parseInt(button.innerText);
-                firstClick = true;
+                firstNum += button.innerText;
+                display(firstNum);
             } else {
                 display(button);
                 secNum = parseInt(button.innerText);
@@ -57,12 +59,16 @@ function chosenOperator() {
 
     operatorButton.forEach((button) => {
         button.addEventListener('click', () => {
-            //let's fix this up to change to correct text when clicked
-            //working on this
+            firstClick = true;
+            operatorPicked = true;
+
             switch(button.id) {
                 case 'add': operator = add;
+                break;
                 case 'subtract': operator = subtract;
+                break;
                 case 'multiply': operator = multiply;
+                break;
                 case 'divide': operator = divide;
                 break;
             }
@@ -76,7 +82,10 @@ function equals() {
     const equalsButton = document.querySelector('#equals');
 
     equalsButton.addEventListener('click', () => {
-        operate(operator, firstNum, secNum);
+        console.log(operator);
+        console.log(firstNum);
+        console.log(secNum);
+        operate(operator, parseInt(firstNum), secNum);
     });
 }
 
@@ -86,5 +95,3 @@ equals();
 
 
 
-
-// when the user clicks the number button, we append the number until it's done e.g 99 / 11
