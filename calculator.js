@@ -1,5 +1,6 @@
-let operator, secNum;
+let operator;
 let firstNum = "";
+let secNum = "";
 let firstClick = false;
 let operatorPicked = false;
 
@@ -46,8 +47,8 @@ function displayNums() {
                 firstNum += button.innerText;
                 display(firstNum);
             } else {
-                display(button);
-                secNum = parseInt(button.innerText);
+                secNum += button.innerText;
+                display(secNum);
             }
         });
     });
@@ -85,7 +86,7 @@ function equals() {
         console.log(operator);
         console.log(firstNum);
         console.log(secNum);
-        operate(operator, parseInt(firstNum), secNum);
+        operate(operator, parseInt(firstNum), parseInt(secNum));
     });
 }
 
@@ -93,5 +94,7 @@ displayNums();
 chosenOperator();
 equals();
 
+// figure out how to move away from global variables
+// let's add the same functionality of firstNum to secNum WORKING ON THIS
 
-
+// when the user hits the operator for the second time (or more) after the first pair is calculated the number in the display will need to update
