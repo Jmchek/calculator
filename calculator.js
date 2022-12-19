@@ -31,17 +31,25 @@ function display(shownNum) {
 }
 
 //function to click numbers and display them
-//need to amend this
-function displayNums() {
+function calc() {
     const numButton = document.querySelectorAll('.just-nums');
+    const operatorButton = document.querySelectorAll('.operators-btns');
     let firstNum = "";
     let firstOfNumPairSelected = false;
+
+    //add listener for operator here THIS IS IT
+    operatorButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            firstOfNumPairSelected = true;
+            chosenOperator(firstNum, firstOfNumPairSelected); 
+        });
+    });
+    
 
     numButton.forEach((button) => {
         button.addEventListener('click', () => {
                 firstNum += button.innerText;
-                display(firstNum);
-                chosenOperator(firstNum, firstOfNumPairSelected);  
+                display(firstNum); 
         });
     });
 
@@ -54,11 +62,11 @@ function chosenOperator(firstNum, firstOfNumPairSelected) {
     let operator;
     this.firstNum = firstNum;
     this.firstOfNumPairSelected = firstOfNumPairSelected;
+    console.log(firstNum, firstOfNumPairSelected);
+
 
     operatorButton.forEach((button) => {
         button.addEventListener('click', () => {
-            // firstOfNumPairSelected = true;
-            // operatorPicked = true;
 
             switch(button.id) {
                 case 'add': {
@@ -73,24 +81,16 @@ function chosenOperator(firstNum, firstOfNumPairSelected) {
                 break;
                 case 'divide': operator = divide;
                 break;
-            }
-            if (firstOfNumPairSelected){
-                secondDisplayNums(firstNum, operator);
-            }          
+            }         
             
         });
     });
-
 }
 
 //find out the second pair to calc
 function secondDisplayNums(firstNum, operator) {
-    this.firstNum = parseInt(firstNum);
+    this.firstNum = firstNum;
     this.operator = operator;
-
-    //figure out why this is outputting multiple console.logs and why it's not parsing Int
-    console.log(typeof firstNum);
-    console.log(firstNum, operator);
 }
 
 //the equals function
@@ -102,20 +102,9 @@ function equals() {
     });
 }
 
-displayNums();
-// chosenOperator();
+calc();
 equals();
 
-// figure out how to move away from global variables
-// refactor equals
-// refactor chosenOperator
-// let's add the same functionality of firstNum to secNum WORKING ON THIS
-
-// when the user hits the operator for the second time (or more) after the first pair is calculated the number in the display will need to update
-
-// user inputs number (displayNums)
-// pass chosen number to chosenOperator? yes
-// user then selects operator, this sets the first number of pair flag to true
-// once the operator is picked, we send the firstNum and operator back to displayNums and figure out the secOfNumPairSelected
-// then inputs another number
-// if the user at this point hits either another operator or equals, we calculate the answer and display
+// okay so we have the user inputs number in calc()
+// once they click an operator, the number is sent off to be calculated
+// figure out from here
