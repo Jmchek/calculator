@@ -35,13 +35,25 @@ function calc() {
     const numButton = document.querySelectorAll('.just-nums');
     const operatorButton = document.querySelectorAll('.operators-btns');
     let firstNum = "";
-    let firstOfNumPairSelected = false;
+    let operator;
 
     //add listener for operator here THIS IS IT
     operatorButton.forEach((button) => {
         button.addEventListener('click', () => {
-            firstOfNumPairSelected = true;
-            chosenOperator(firstNum, firstOfNumPairSelected); 
+            switch(button.id) {
+                case 'add': {
+                    operator = add;
+                }
+                break;
+                case 'subtract': operator = subtract;
+                break;
+                case 'multiply': operator = multiply;
+                break;
+                case 'divide': operator = divide;
+                break;
+            }  
+
+            chosenOperator(parseInt(firstNum), numButton, operator); 
         });
     });
     
@@ -56,54 +68,28 @@ function calc() {
 }
 
 //function to store operator selected
-function chosenOperator(firstNum, firstOfNumPairSelected) {
-    const operatorButton = document.querySelectorAll('.operators-btns');
-    let operatorPicked = false;
-    let operator;
-    this.firstNum = firstNum;
-    this.firstOfNumPairSelected = firstOfNumPairSelected;
-    console.log(firstNum, firstOfNumPairSelected);
-
-
-    operatorButton.forEach((button) => {
-        button.addEventListener('click', () => {
-
-            switch(button.id) {
-                case 'add': {
-                    operator = add;
-                    firstOfNumPairSelected = true;
-                    operatorPicked = true;
-                }
-                break;
-                case 'subtract': operator = subtract;
-                break;
-                case 'multiply': operator = multiply;
-                break;
-                case 'divide': operator = divide;
-                break;
-            }         
-            
-        });
-    });
-}
-
-//find out the second pair to calc
-function secondDisplayNums(firstNum, operator) {
+function chosenOperator(firstNum, numButton, operator) {
+    const equalsButton = document.querySelector('#equals');
+    this.numButton = numButton;
     this.firstNum = firstNum;
     this.operator = operator;
-}
+    let secNum = "";
 
-//the equals function
-function equals() {
-    const equalsButton = document.querySelector('#equals');
+    numButton.forEach((button) => {
+        button.addEventListener('click', () => {
+                secNum += button.innerText;
+                display(secNum); 
+        });
+    });
 
     equalsButton.addEventListener('click', () => {
-        
+        operate(operator, firstNum, parseInt(secNum));
     });
+
+    
 }
 
 calc();
-equals();
 
 // okay so we have the user inputs number in calc()
 // once they click an operator, the number is sent off to be calculated
