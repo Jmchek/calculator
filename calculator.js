@@ -15,7 +15,7 @@ function divide(x, y) {
 }
 
 function operate(someFunc, x, y) {
-    display(someFunc(x,y));
+    return someFunc(x,y);
 }
 
 //function's only job is to display numbers
@@ -37,7 +37,7 @@ function calc() {
     let firstNum = "";
     let operator;
 
-    //add listener for operator here THIS IS IT
+    //add listener for operator here
     operatorButton.forEach((button) => {
         button.addEventListener('click', () => {
             switch(button.id) {
@@ -53,7 +53,8 @@ function calc() {
                 break;
             }  
 
-            chosenOperator(parseInt(firstNum), numButton, operator); 
+            chosenOperator(parseInt(firstNum), numButton, operator, operatorButton); 
+            firstNum = "";
         });
     });
     
@@ -61,19 +62,46 @@ function calc() {
     numButton.forEach((button) => {
         button.addEventListener('click', () => {
                 firstNum += button.innerText;
-                display(firstNum); 
+                display(firstNum);
         });
     });
 
 }
 
 //function to store operator selected
-function chosenOperator(firstNum, numButton, operator) {
+function chosenOperator(firstNum, numButton, operator, operatorButton) {
     const equalsButton = document.querySelector('#equals');
     this.numButton = numButton;
     this.firstNum = firstNum;
     this.operator = operator;
     let secNum = "";
+    let storage = parseInt(firstNum);
+    let equalsHit = false;
+
+    operatorButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            switch(button.id) {
+                case 'add': {
+                    storage = operate(operator, firstNum, parseInt(secNum));
+                    display(storage);
+                    firstNum = "";
+                    secNum = "";
+                    console.log(storage);
+                    // while(!equalsHit){
+
+                    // }
+                }
+                break;
+                case 'subtract': operator = subtract;
+                break;
+                case 'multiply': operator = multiply;
+                break;
+                case 'divide': operator = divide;
+                break;
+            }  
+
+        });
+    });
 
     numButton.forEach((button) => {
         button.addEventListener('click', () => {
@@ -83,7 +111,9 @@ function chosenOperator(firstNum, numButton, operator) {
     });
 
     equalsButton.addEventListener('click', () => {
-        operate(operator, firstNum, parseInt(secNum));
+        // display(operate(operator, firstNum, parseInt(secNum)));
+        storage = operate(operator, firstNum, parseInt(secNum));
+        display(storage);
     });
 
     
@@ -91,6 +121,10 @@ function chosenOperator(firstNum, numButton, operator) {
 
 calc();
 
-// okay so we have the user inputs number in calc()
-// once they click an operator, the number is sent off to be calculated
-// figure out from here
+// figuring out the logic of chaining multiple pairs
+
+// user inputs the first number of pair
+// once operator is chosen, the firstNum is sent to chosenOperator() function to be stored
+// then the user selects the second number
+// when the operator is hit again, the firstNum, secNum, and operator are calculated and the answer is displayed and stored
+// now we need to use the stored number and operate with the second of pair
