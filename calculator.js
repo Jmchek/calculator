@@ -34,15 +34,52 @@ function display(shownNum) {
 function calc() {
     const numButton = document.querySelectorAll('.just-nums');
     const operatorButton = document.querySelectorAll('.operators-btns');
+    const equalsButton = document.querySelector('#equals');
     let firstNum = "";
+    let secNum = "";
     let operator;
+    let firstPairPicked = false;
+    let storage = 0;
 
     //add listener for operator here
     operatorButton.forEach((button) => {
         button.addEventListener('click', () => {
+            firstPairPicked = true;
+            
             switch(button.id) {
                 case 'add': {
                     operator = add;
+                    
+                    
+                    // storage = operate(operator, firstNum, parseInt(secNum));
+                    // display(storage);
+                    // firstNum = "";
+                    // secNum = "";
+                    // console.log(storage);
+                    if (firstNum && firstPairPicked && !secNum) {
+                        storage = parseInt(firstNum);
+                    }
+
+                    if (secNum != "") {
+                        console.log(storage);
+                        storage = operate(operator, parseInt(storage), parseInt(secNum));
+                        display(storage);
+                        console.log(storage);
+                        secNum = "";
+                    }
+
+                    
+
+                    // if(firstPairPicked) {
+                    //     storage = operate(operator, parseInt(firstNum), parseInt(secNum));
+                    //     display(storage);
+                    //     firstNum = storage;
+                    //     secNum = "";
+                    // }
+
+                    // firstPairPicked = !firstPairPicked;
+
+                    // console.log(storage);
                 }
                 break;
                 case 'subtract': operator = subtract;
@@ -53,71 +90,91 @@ function calc() {
                 break;
             }  
 
-            chosenOperator(parseInt(firstNum), numButton, operator, operatorButton); 
-            firstNum = "";
+            // chosenOperator(parseInt(firstNum), numButton, operator, operatorButton); 
+            // firstNum = "";
         });
     });
     
 
     numButton.forEach((button) => {
         button.addEventListener('click', () => {
+                if (!firstPairPicked){
                 firstNum += button.innerText;
                 display(firstNum);
+                }
+
+                if(firstPairPicked) {
+                secNum += button.innerText;
+                display(secNum);
+            }
         });
+    });
+
+    // numButton.forEach((button) => {
+    //     button.addEventListener('click', () => {
+    //             secNum += button.innerText;
+    //             display(secNum); 
+    //     });
+    // });
+
+    equalsButton.addEventListener('click', () => {
+        // display(operate(operator, firstNum, parseInt(secNum)));
+        storage = operate(operator, parseInt(firstNum), parseInt(secNum));
+        display(storage);
     });
 
 }
 
 //function to store operator selected
-function chosenOperator(firstNum, numButton, operator, operatorButton) {
-    const equalsButton = document.querySelector('#equals');
-    this.numButton = numButton;
-    this.firstNum = firstNum;
-    this.operator = operator;
-    let secNum = "";
-    let storage = parseInt(firstNum);
-    let equalsHit = false;
+// function chosenOperator(firstNum, numButton, operator, operatorButton) {
+//     const equalsButton = document.querySelector('#equals');
+//     this.numButton = numButton;
+//     this.firstNum = firstNum;
+//     this.operator = operator;
+//     let secNum = "";
+//     let storage = parseInt(firstNum);
+//     let equalsHit = false;
 
-    operatorButton.forEach((button) => {
-        button.addEventListener('click', () => {
-            switch(button.id) {
-                case 'add': {
-                    storage = operate(operator, firstNum, parseInt(secNum));
-                    display(storage);
-                    firstNum = "";
-                    secNum = "";
-                    console.log(storage);
-                    // while(!equalsHit){
+//     operatorButton.forEach((button) => {
+//         button.addEventListener('click', () => {
+//             switch(button.id) {
+//                 case 'add': {
+//                     storage = operate(operator, firstNum, parseInt(secNum));
+//                     display(storage);
+//                     firstNum = "";
+//                     secNum = "";
+//                     console.log(storage);
+//                     // while(!equalsHit){
 
-                    // }
-                }
-                break;
-                case 'subtract': operator = subtract;
-                break;
-                case 'multiply': operator = multiply;
-                break;
-                case 'divide': operator = divide;
-                break;
-            }  
+//                     // }
+//                 }
+//                 break;
+//                 case 'subtract': operator = subtract;
+//                 break;
+//                 case 'multiply': operator = multiply;
+//                 break;
+//                 case 'divide': operator = divide;
+//                 break;
+//             }  
 
-        });
-    });
+//         });
+//     });
 
-    numButton.forEach((button) => {
-        button.addEventListener('click', () => {
-                secNum += button.innerText;
-                display(secNum); 
-        });
-    });
+//     numButton.forEach((button) => {
+//         button.addEventListener('click', () => {
+//                 secNum += button.innerText;
+//                 display(secNum); 
+//         });
+//     });
 
-    equalsButton.addEventListener('click', () => {
-        // display(operate(operator, firstNum, parseInt(secNum)));
-        storage = operate(operator, firstNum, parseInt(secNum));
-        display(storage);
-    });
+//     equalsButton.addEventListener('click', () => {
+//         // display(operate(operator, firstNum, parseInt(secNum)));
+//         storage = operate(operator, firstNum, parseInt(secNum));
+//         display(storage);
+//     });
 
     
-}
+// }
 
 calc();
 
