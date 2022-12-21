@@ -50,6 +50,14 @@ function calc() {
             }
 
             switch(button.id) {
+                case 'clear': {
+                    firstPairPicked = false;
+                    equalsHit = false;
+                    firstNum = "";
+                    secNum = "";
+                    display(0);
+                }
+                break;
                 case 'add': operator = add;
                 break;
                 case 'subtract': operator = subtract;
@@ -72,7 +80,6 @@ function calc() {
                 secNum = "";
             }
 
-            console.log(storage);
 
         });
     });
@@ -95,8 +102,6 @@ function calc() {
         storage = operate(operator, parseInt(storage), parseInt(secNum));
         display(storage);
         secNum = "";
-
-        console.log(storage);
     });
 
 }
