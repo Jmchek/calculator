@@ -46,7 +46,7 @@ function calc() {
         button.addEventListener('click', () => {
             firstPairPicked = true;
             if (firstNum && firstPairPicked && !secNum && !equalsHit) {
-                storage = parseInt(firstNum);
+                storage = parseFloat(firstNum);
             }
 
             switch(button.id) {
@@ -68,16 +68,27 @@ function calc() {
                 break;
             }  
 
-            if (secNum != "" && !equalsHit) {
-                storage = operate(operator, parseInt(storage), parseInt(secNum));
-                display(storage);
-                secNum = "";
-            } 
+            // if (secNum && !equalsHit) {
+            //     storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+            //     display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
+            //     secNum = "";
+            // } 
             
-            if (secNum && equalsHit) {
-                storage = operate(operator, parseInt(storage), parseInt(secNum));
-                display(storage);
+            // if (secNum && equalsHit) {
+            //     storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+            //     display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
+            //     secNum = "";
+            //     // equalsHit = false;
+            // }
+
+            //figuring out the +++*= bug, if you choose secnum then operator it applies that op
+            if (secNum) {
+                console.log(storage);
+                console.log(secNum);
+                storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+                display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
                 secNum = "";
+                // equalsHit = false;
             }
 
 
@@ -99,8 +110,10 @@ function calc() {
 
     equalsButton.addEventListener('click', () => {
         equalsHit = true;
-        storage = operate(operator, parseInt(storage), parseInt(secNum));
-        display(storage);
+        if(storage && secNum){
+            storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+        }
+        display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
         secNum = "";
     });
 
