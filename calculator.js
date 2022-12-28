@@ -41,7 +41,6 @@ function calc() {
     let firstPairPicked = false;
     let equalsHit = false;
     let storage = 0;
-    let decimalChosen = false;
 
     operatorButton.forEach((button) => {
         button.addEventListener('click', () => {
@@ -107,15 +106,19 @@ function calc() {
 
     numButton.forEach((button) => {
         button.addEventListener('click', () => {
-            // figure out how to disable the second decimal
-            if (button.id == "dot") {
-                decimalChosen = true;
-            }
             if (!firstPairPicked){
-            firstNum += button.innerText;
+                if (firstNum.includes(".") && button.id == "dot") {
+                    firstNum = firstNum;
+                } else {
+                    firstNum += button.innerText;
+                }
             display(firstNum);
             } else {
-            secNum += button.innerText;
+                if (secNum.includes(".") && button.id == "dot") {
+                    secNum = secNum;
+                } else {
+                    secNum += button.innerText;
+                }
             display(secNum);
             }
         });
