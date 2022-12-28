@@ -41,6 +41,7 @@ function calc() {
     let firstPairPicked = false;
     let equalsHit = false;
     let storage = 0;
+    let decimalChosen = false;
 
     operatorButton.forEach((button) => {
         button.addEventListener('click', () => {
@@ -106,23 +107,35 @@ function calc() {
 
     numButton.forEach((button) => {
         button.addEventListener('click', () => {
-                if (!firstPairPicked){
-                firstNum += button.innerText;
-                display(firstNum);
-                } else {
-                secNum += button.innerText;
-                display(secNum);
+            // figure out how to disable the second decimal
+            if (button.id == "dot") {
+                decimalChosen = true;
+            }
+            if (!firstPairPicked){
+            firstNum += button.innerText;
+            display(firstNum);
+            } else {
+            secNum += button.innerText;
+            display(secNum);
             }
         });
     });
 
     equalsButton.addEventListener('click', () => {
         equalsHit = true;
-        if(storage && secNum){
+        if (operator == divide && secNum == 0) {
+            display("Nice try!");
+            firstPairPicked = false;
+            equalsHit = false;
+            firstNum = "";
+            secNum = "";
+            storage = "";
+            display(0);
+        } else if(secNum){
             storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+            display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
+            secNum = "";
         }
-        display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
-        secNum = "";
     });
 
 }
