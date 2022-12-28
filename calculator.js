@@ -58,39 +58,47 @@ function calc() {
                     display(0);
                 }
                 break;
-                case 'add': operator = add;
+                case 'add': {
+                    if (secNum) {
+                        storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+                        display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
+                        secNum = "";
+                        operator = "";
+                    }
+                    operator = add;
+                }
                 break;
-                case 'subtract': operator = subtract;
+                case 'subtract': {
+                    if (secNum) {
+                        storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+                        display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
+                        secNum = "";
+                        operator = "";
+                    }
+                    operator = subtract;
+                }
                 break;
-                case 'multiply': operator = multiply;
+                case 'multiply': {
+                    if (secNum) {
+                        storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+                        display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
+                        secNum = "";
+                        operator = "";
+                    }
+                    operator = multiply;
+                }
                 break;
-                case 'divide': operator = divide;
+                case 'divide': {
+                    if (secNum) {
+                        storage = operate(operator, parseFloat(storage), parseFloat(secNum));
+                        display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
+                        secNum = "";
+                        operator = "";
+                    }
+                    operator = divide;
+                }
                 break;
             }  
-
-            // if (secNum && !equalsHit) {
-            //     storage = operate(operator, parseFloat(storage), parseFloat(secNum));
-            //     display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
-            //     secNum = "";
-            // } 
-            
-            // if (secNum && equalsHit) {
-            //     storage = operate(operator, parseFloat(storage), parseFloat(secNum));
-            //     display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
-            //     secNum = "";
-            //     // equalsHit = false;
-            // }
-
-            //figuring out the +++*= bug, if you choose secnum then operator it applies that op
-            if (secNum) {
-                console.log(storage);
-                console.log(secNum);
-                storage = operate(operator, parseFloat(storage), parseFloat(secNum));
-                display(Number.isInteger(storage) ? storage.toFixed() : storage.toFixed(2));
-                secNum = "";
-                // equalsHit = false;
-            }
-
 
         });
     });
