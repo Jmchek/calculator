@@ -49,7 +49,24 @@ function calc() {
                 storage = parseFloat(firstNum);
             }
 
+            
             switch(button.id) {
+                case 'backspace': {
+                    if(firstNum && !secNum) {
+                        firstNum = firstNum.slice(0, -1);
+                        if(!firstNum) {
+                            firstNum = 0;
+                        }
+                        display(firstNum);
+                    } else if (secNum) {
+                        secNum = secNum.slice(0, -1);
+                        if(!secNum) {
+                            secNum = 0;
+                        }
+                        display(secNum);
+                    }
+                }
+                break;
                 case 'clear': {
                     firstPairPicked = false;
                     equalsHit = false;
