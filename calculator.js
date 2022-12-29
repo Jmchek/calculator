@@ -35,6 +35,7 @@ function calc() {
     const numButton = document.querySelectorAll('.just-nums');
     const operatorButton = document.querySelectorAll('.operators-btns');
     const equalsButton = document.querySelector('#equals');
+    const bodySelector = document.querySelector('body');
     let firstNum = "";
     let secNum = "";
     let operator;
@@ -43,12 +44,38 @@ function calc() {
     let storage = 0;
 
     operatorButton.forEach((button) => {
+        //key listener
+        bodySelector.addEventListener('keydown', (event) => {
+                switch(event.key) {
+                    case 'Backspace': {
+                        document.querySelector('#backspace').click();
+                    }
+                    break;
+                    case '+': {
+                        document.querySelector('#add').click();
+                    }
+                    break;
+                    case '-': {
+                        document.querySelector('#subtract').click();
+                    }
+                    break;
+                    case '*': {
+                        document.querySelector('#multiply').click();
+                    }
+                    break;
+                    case '/': {
+                        document.querySelector('#divide').click();
+                    }
+                    break;
+                }
+            });
+        
+        //mouse listener
         button.addEventListener('click', () => {
             firstPairPicked = true;
             if (firstNum && firstPairPicked && !secNum && !equalsHit) {
                 storage = parseFloat(firstNum);
             }
-
             
             switch(button.id) {
                 case 'backspace': {
