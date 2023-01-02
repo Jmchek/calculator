@@ -27,10 +27,10 @@ function display(shownNum) {
     } else {
         displayStorage.textContent = shownNum;
     }
-    
+
 }
 
-//function to click numbers and display them
+//calc function
 function calc() {
     const numButton = document.querySelectorAll('.just-nums');
     const operatorButton = document.querySelectorAll('.operators-btns');
@@ -43,6 +43,7 @@ function calc() {
     let equalsHit = false;
     let storage = 0;
 
+    //operator buttons
     operatorButton.forEach((button) => {
         //key listener
         bodySelector.addEventListener('keydown', (event) => {
@@ -147,8 +148,178 @@ function calc() {
         });
     });
     
-
+    //number buttons including decimal
     numButton.forEach((button) => {
+        //key listener
+        switch(button.id) {
+            case 'one': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit1': {
+                            document.querySelector('#one').click();
+                        }
+                        break;
+                        case 'Numpad1': {
+                            document.querySelector('#one').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'two': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit2': {
+                            document.querySelector('#two').click();
+                        }
+                        break;
+                        case 'Numpad2': {
+                            document.querySelector('#two').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'three': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit3': {
+                            document.querySelector('#three').click();
+                        }
+                        break;
+                        case 'Numpad3': {
+                            document.querySelector('#three').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'four': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit4': {
+                            document.querySelector('#four').click();
+                        }
+                        break;
+                        case 'Numpad4': {
+                            document.querySelector('#four').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'five': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit5': {
+                            document.querySelector('#five').click();
+                        }
+                        break;
+                        case 'Numpad5': {
+                            document.querySelector('#five').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'six': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit6': {
+                            document.querySelector('#six').click();
+                        }
+                        break;
+                        case 'Numpad6': {
+                            document.querySelector('#six').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'seven': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit7': {
+                            document.querySelector('#seven').click();
+                        }
+                        break;
+                        case 'Numpad7': {
+                            document.querySelector('#seven').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'eight': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit8': {
+                            document.querySelector('#eight').click();
+                        }
+                        break;
+                        case 'Numpad8': {
+                            document.querySelector('#eight').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'nine': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit9': {
+                            document.querySelector('#nine').click();
+                        }
+                        break;
+                        case 'Numpad9': {
+                            document.querySelector('#nine').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'zero': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Digit0': {
+                            document.querySelector('#zero').click();
+                        }
+                        break;
+                        case 'Numpad0': {
+                            document.querySelector('#zero').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+            case 'dot': {
+                bodySelector.addEventListener('keydown', (event) => {
+                    switch(event.code) {
+                        case 'Period': {
+                            document.querySelector('#dot').click();
+                        }
+                        break;
+                        case 'NumpadDecimal': {
+                            document.querySelector('#dot').click();
+                        }
+                        break;
+                    }
+                })
+            }
+            break;
+        };
+
+        //mouse listener
         button.addEventListener('click', () => {
             if (!firstPairPicked){
                 if (firstNum.includes(".") && button.id == "dot") {
@@ -166,6 +337,14 @@ function calc() {
             display(secNum);
             }
         });
+    });
+
+
+    //equals key/mouse listener
+    bodySelector.addEventListener('keydown', (event) => {
+        if (event.key == 'Enter') {
+            document.querySelector('#equals').click();
+        }
     });
 
     equalsButton.addEventListener('click', () => {
