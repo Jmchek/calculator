@@ -45,13 +45,20 @@ function calc() {
 
     //operator buttons
     operatorButton.forEach((button) => {
+        
         //key listener
-        bodySelector.addEventListener('keydown', (event) => {
+        if(button.id == "backspace"){
+            bodySelector.addEventListener('keydown', (event) => {
                 switch(event.key) {
                     case 'Backspace': {
                         document.querySelector('#backspace').click();
                     }
                     break;
+                }
+            })
+        };
+        bodySelector.addEventListener('keydown', (event) => {
+                switch(event.key) {
                     case '+': {
                         document.querySelector('#add').click();
                     }
@@ -342,6 +349,7 @@ function calc() {
 
     //equals key/mouse listener
     bodySelector.addEventListener('keydown', (event) => {
+        console.log(event);
         if (event.key == 'Enter') {
             document.querySelector('#equals').click();
         }
