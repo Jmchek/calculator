@@ -80,7 +80,10 @@ function calc() {
         
         //mouse listener
         button.addEventListener('click', () => {
-            firstPairPicked = true;
+            if(button.id != 'backspace') {
+                firstPairPicked = true;
+            }
+
             if (firstNum && firstPairPicked && !secNum && !equalsHit) {
                 storage = parseFloat(firstNum);
             }
@@ -349,7 +352,6 @@ function calc() {
 
     //equals key/mouse listener
     bodySelector.addEventListener('keydown', (event) => {
-        console.log(event);
         if (event.key == 'Enter') {
             document.querySelector('#equals').click();
         }
